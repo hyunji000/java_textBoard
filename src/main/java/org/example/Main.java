@@ -4,13 +4,34 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //스캐너 객체
+        //create / read / update / delete + detail + exit
+        //exit 외의 다른 명령어가 들어왔다면 "명령어를 다시 입력해주세요"출력
+        //후 명령어를 입력해주세요:
+
+
+        //반복문생성
         Scanner scanner = new Scanner(System.in);
-        //사용자에게 입력받을수 있도록 출력
-        System.out.print("명령어를 입력해 주세요 : ");
-        //값 입력 받는거
-        String command = scanner.nextLine();
-        System.out.println("입력하신 명령어는 : " + command);
+        boolean programStatus = true;
+        while(programStatus){
+            System.out.print("명령어를 입력해 주세요 : ");
+            String command = scanner.nextLine();
+            switch (command){
+                case "exit":
+                    System.out.println("프로그램을 종료합니다.");
+                    programStatus = false;
+                    break;
+                default:
+                    System.out.println("명령어를 다시 입력해주세요.");
+            }
+        }
     }
 
+
+
 }
+ //if(command.equals(("exit"))){
+        // System.out.println("프로그램을 종료합니다.");
+       //  programStatus = false;
+       //  } else {
+       //  System.out.println("명령 다시");
+      //   }
