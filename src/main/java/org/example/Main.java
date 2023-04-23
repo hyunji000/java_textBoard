@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -11,12 +13,38 @@ public class Main {
         // trim = 명령어를 입력할때 띄어씌기도 출력할수있도록 해줌
         //반복문생성
         Scanner scanner = new Scanner(System.in);
+
+        List<Post> postList = new ArrayList<>();
+
+
         boolean programStatus = true;
         int postCount = 0;
         while(programStatus){
             System.out.print("명령어를 입력해 주세요 : ");
             String command = scanner.nextLine().trim();
             switch (command){
+                case "detail":
+
+                    System.out.print("게시글 번호를 입력해 주세요 : ");
+                    String postId = scanner.nextLine().trim();
+
+                    try{
+                        int id = Integer.parseInt(postId);
+                        Post foundPost = postList.get(id-1);
+
+                        System.out.println("게시글 번호 : " + foundPost.getId());
+                        System.out.println("게시글 제목 : " + foundPost.getTitle());
+                        System.out.println("게시글 내용 : " + foundPost.getBody());
+                        System.out.println("게시글 작성일 : " + foundPost.getRegDate());
+                        System.out.println("게시글 수정일 : " + foundPost.getUpdateDate());
+
+                    }catch (NumberFormatException e){
+                        System.out.println("게시글 번호를 정수로 입력해 주세요.");
+                    }catch (IndexOutOfBoundsException e){
+                        System.out.println("게시글 번호를 다시 한번 확인해 주세요.");
+                    }
+                    break;
+
                 case  "write":
                     System.out.println("게시글을 작성합니다.");
                     System.out.print("제목 : " );
@@ -25,7 +53,9 @@ public class Main {
                     String body = scanner.nextLine().trim();
                     postCount++;
                     Post newPost = new Post(postCount,title,body);
-                    System.out.println("작성된 게시글 : " + newPost);
+                    postList.add(newPost);
+
+                    System.out.println(postCount + "번 게시글이 생성되었습니다.");
                     break;
                 case "exit":
                     System.out.println("프로그램을 종료합니다.");
