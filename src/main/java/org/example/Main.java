@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,6 +24,41 @@ public class Main {
             System.out.print("명령어를 입력해 주세요 : ");
             String command = scanner.nextLine().trim();
             switch (command){
+                case "update":
+
+                    System.out.println("게시글을 수정합니다.");
+
+                    System.out.println("수정할 게시글 번호를 입력해주세요.");
+                    System.out.println("게시글 번호 : ");
+                    String updatePostId = scanner.nextLine().trim();
+                    // 예외 처리 , try catch
+                    try {
+                        int id = Integer.parseInt(updatePostId);
+                        Post foundPost = postList.get(id - 1); // 배열, index 번호를 꺼내옴
+
+                        System.out.println("제목 : " + foundPost.getTitle());
+                        System.out.println("수정할 제목을 입력해 주세요 :");
+                        String updateTitle = scanner.nextLine().trim();
+
+                        System.out.println("내용 : " + foundPost.getBody());
+                        System.out.println("수정할 내용을 입력해 주세요 :");
+                        String updateBody = scanner.nextLine().trim();
+
+                        foundPost.setTitle(updateTitle);
+                        foundPost.setBody(updateBody);
+                        foundPost.setUpdateDate(LocalDateTime.now());
+                        //현재 시간 , 시점만 알려주는거라 update에서가 아닌 detail 에서 나옴
+
+                        System.out.println("게시물 수정이 완료되었습니다.");
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("게시글 번호를 정수로 입력해주세요.");
+                    } catch (IndexOutOfBoundsException e){
+                        System.out.println("게시글 번호를 다시 확인해주세요.");
+                    }
+
+                    break;
+
                 case "detail":
 
                     System.out.print("게시글 번호를 입력해 주세요 : ");
