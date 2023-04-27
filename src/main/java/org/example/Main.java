@@ -21,9 +21,35 @@ public class Main {
         boolean programStatus = true;
         int postCount = 0;
         while(programStatus){
+
             System.out.print("명령어를 입력해 주세요 : ");
             String command = scanner.nextLine().trim();
+
             switch (command){
+
+                case "delete" :
+                    System.out.println("게시글을 삭제합니다.");
+                    System.out.println("삭제할 게시글의 번호를 입력해주세요:");
+                    String deleteId = scanner.nextLine().trim();
+                try{
+                    int id = Integer.parseInt(deleteId);
+                    //게시글 삭제
+                    Post foundPost = postList.get(id-1); //(-> 객체)
+                    //if의 조건은 id를 가지고 인덱스번 게시글을 찾아서 null이
+                    //아닌 경우에만 삭제할 수 있도록 만들어 줘야 한다.
+                    if (null != foundPost) {
+                        postList.set(id - 1, null);
+                    }
+                }
+                catch (NumberFormatException e){
+                    System.out.println("게시글의 번호를 정수로 입력하세요.");
+                }catch(IndexOutOfBoundsException e){
+                    System.out.println("게시글의 번호를 다시 확인해주세요.");
+                }catch (NullPointerException e){
+                    System.out.println("이미 삭제된 게시글 입니다.");
+                }
+                break;
+
                 case "update":
 
                     System.out.println("게시글을 수정합니다.");
@@ -78,6 +104,8 @@ public class Main {
                         System.out.println("게시글 번호를 정수로 입력해 주세요.");
                     }catch (IndexOutOfBoundsException e){
                         System.out.println("게시글 번호를 다시 한번 확인해 주세요.");
+                    }catch (NullPointerException e){
+                        System.out.println("이미 삭제된 게시글 입니다.");
                     }
                     break;
 
