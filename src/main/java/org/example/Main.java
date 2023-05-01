@@ -27,6 +27,22 @@ public class Main {
 
             switch (command){
 
+                //리스트를 하기 위해서 for문을 사용해 준다.
+                case "list" :
+                   // siza(): 현재 들어있는 크기가 나옴
+                    if(postList.size() == 0){
+                        System.out.println("현재 게시물이 비어있습니다.");
+                    } else {
+                     System.out.println("현재까지 입력 된 게시글입니다.");
+                     for(Post post : postList){
+                         System.out.println(post.getId());
+                         System.out.println(post.getTitle());
+                         System.out.println(post.getBody());
+                         System.out.println(post.getUpdateDate());
+                     }
+                     System.out.println("완료되었습니다.");
+                 }
+                 break;
                 case "delete" :
                     System.out.println("게시글을 삭제합니다.");
                     System.out.println("삭제할 게시글의 번호를 입력해주세요:");
